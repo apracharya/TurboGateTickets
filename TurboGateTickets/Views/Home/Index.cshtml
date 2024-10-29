@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Race>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .track-image {
+        object-fit: contain;
+    }
+    .h-200 {
+        height: 300px;
+    }
+</style>
+<main class="pt-4">
+    <p class="h3 pb-2">
+        Upcoming Races
+    </p>
+
+    @if(Model.Count() == 0)
+    {
+        <p class="h4">Oops, Nothing here!</p>
+    }
+        <div class="row mb-2">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6">
+                    <div class="h-200 row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-primary-emphasis">@item.RaceType</strong>
+                            <h3 class="mb-0">@item.Name</h3>
+                            @{
+                                var start = item.StartDate;
+                                var formattedStartDate = DateOnly.FromDateTime(start).ToString("dd MMM yyyy"); // 10 Sep 2024
+                                var end = item.EndDate;
+                                var formattedEndDate = DateOnly.FromDateTime(end).ToString("dd MMM yyyy");
+
+                            }
+                            <div class="mb-2 text-secondary">@formattedStartDate</div>
+                            <p class="card-text mb-auto">
+                                <b>@item.Track</b> @item.TrackDescription
+                            </p>
+                            <div class="flex">
+                                <a type="button"
+                                   class="btn bg-primary mt-3 text-white border-1 border-dark"
+                                   asp-controller="Race" asp-action="Detail" asp-route-id="@item.Id">
+                                    Details
+                                </a>
+                            <a type="button"
+                               class="btn bg-dark ms-2 mt-3 text-white border-1 border-dark"
+                               asp-controller="Race" asp-action="Ticket" asp-route-id="@item.Id">
+                                Buy Tickets
+                            </a>
+                            </div>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <img src="@item.TrackLayout"
+                                 class="py-3 track-image"
+                                 width="250"
+                                 height="250" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    
+</main>

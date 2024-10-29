@@ -1,0 +1,61 @@
+﻿@model Race
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = @Model.Name;
+}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="main-img">
+                <img class="img-fluid" src="@Model.TrackLayout" alt="Club Image">
+                <!-- Additional preview images can be added here -->
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h2 class="fw-bold">@Model.Name</h2>
+            <p class="text-muted">@Model.Address.City, @Model.Address.State, @Model.Address.Country</p>
+            <p class="text-muted">@Model.Track</p>
+            <p class="my-4">Category: @Model.RaceCategory</p>
+            <p class="mb-4">
+                @Model.RaceType
+            </p>
+            
+            <div>
+                <button class="btn btn-outline-secondary btn-sm" type="button">Add to Wishlist</button>
+                <button class="btn btn-outline-secondary btn-sm" type="button">Buy Tickets</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://variety.com/wp-content/uploads/2023/11/AP22311547647912.jpg?w=1000&h=563&crop=1" class="d-block w-100" alt="Image 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="@Model.TrackLayout" class="d-block w-100" alt="Image 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://files.porsche.com/filestore/image/multimedia/none/992-gt3-modelimage-sideshot/model/765dfc51-51bc-11eb-80d1-005056bbdc38/porsche-model.png" class="d-block w-100" alt="Image 2">
+                    </div>
+                    <!-- Add more carousel items with different images -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <!-- Product details (similar to the previous section) -->
+        </div>
+    </div>
+</div>

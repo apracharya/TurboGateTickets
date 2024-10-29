@@ -1,0 +1,115 @@
+﻿@model Race
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+
+<style>
+    .ticket-card {
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+        .ticket-card:hover {
+            transform: scale(1.05);
+        }
+
+        .ticket-card.active {
+            border: 2px solid #007bff;
+        }
+
+    .summary {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .ticket-options {
+        max-height: 600px;
+        overflow-y: auto;
+    }
+
+    .quantity-input {
+        width: 60px;
+    }
+</style>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="">
+                <img src="@Model.TrackLayout"
+                     class="d-block w-100"
+                     alt="@Model.Track" />
+            </div>
+            <div class="card mt-0 border-0">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Track</h5>
+                    <p class="card-text">
+                        @Model.TrackDescription
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card ticket-options">
+                <div class="card-body">
+                    <h2 class="card-title">Tickets</h2>
+                    @if (Model.Tickets.Count() == 0)
+                    {
+                        <h4 class="mt-3">Sorry! No tickets available!</h4>
+                    }
+                    else
+                    {
+                        <div>
+                            <label>Quantity: </label>
+                            <input class="py-3 ps-3 quantity-input" type="number" id="quantity" name="quantity" value="1" />
+                        </div>
+
+                        <br />
+                    }
+                    <div class="row">
+                        @foreach (var item in Model.Tickets)
+                        {
+
+                            <div class="col-12 mb-3">
+                                <div class="card ticket-card" data-type="Standard" data-price="50">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@item.TicketType</h5>
+                                        <p>Parking: @if (item.Parking == true)
+                                            {
+                                                <span>Available</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Unavailable</span>
+                                            }</p>
+                                        <div class="flex flex-row bottom-0 position-absolute end-0 m-3">
+
+                                            <p class="card-text d-flex justify-content-center h4">$@item.Price</p>
+                                            <a type="button" id="buyButton"
+                                               class="btn btn-danger">
+                                                Buy Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="summary mt-3" id="summary">
+                <h5>Summary</h5>
+                <p id="summaryText">
+                    Select ticket type and quantity to see the summary.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+

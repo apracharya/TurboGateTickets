@@ -1,0 +1,197 @@
+﻿@using TurboGateTickets.Data.Enum
+@using TurboGateTickets.ViewModels
+
+@model EditRaceViewModel
+
+@{
+
+}
+
+<style>
+    /* Background Styling */
+    .page-body {
+        background-color: #f7f7f7;
+        font-family: 'Helvetica Neue', sans-serif;
+        color: #333;
+    }
+
+    /* Form Container */
+    .form-container {
+        background: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: 50px auto;
+    }
+
+    h3 {
+        text-align: center;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 30px;
+    }
+
+    /* Form Groups */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    /* Input & Select Styling */
+    .form-control {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 12px;
+        font-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+        .form-control:focus {
+            border-color: #5c9ae1;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+    /* Labels */
+    label {
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    /* Button Styling */
+    .btn-primary {
+        background-color: #5c9ae1;
+        border-color: #5c9ae1;
+        padding: 12px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 5px;
+        width: 100%;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #4a89c7;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+    /* Helper Text */
+    small {
+        font-size: 13px;
+        color: #888;
+    }
+
+    /* Animations */
+    .form-container {
+        animation: fadeInUp 0.8s ease-in-out;
+    }
+
+    keyframes fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+</style>
+
+<div class="container">
+    <div class="form-container">
+        <h3>Edit Race</h3>
+        <form method="post" asp-action="Edit" enctype="multipart/form-data">
+
+            <input type="hidden" id="AddressId" value="AddressId" />
+
+            <!-- Race Name -->
+            <div class="form-group">
+                <label asp-for="Name">Race Name</label>
+                <input asp-for="Name" type="text" class="form-control" placeholder="Enter race name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <small>What's the name of the race?</small>
+            </div>
+
+            <!-- Track Name -->
+            <div class="form-group">
+                <label asp-for="Track">Track Name</label>
+                <input asp-for="Track" type="text" class="form-control" placeholder="Enter track name">
+                <span asp-validation-for="Track" class="text-danger"></span>
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+                <label asp-for="Address.City">City</label>
+                <input asp-for="Address.City" type="text" class="form-control" placeholder="Enter city">
+                <span asp-validation-for="Address.City" class="text-danger"></span>
+            </div>
+
+            <!-- State -->
+            <div class="form-group">
+                <label asp-for="Address.State">State</label>
+                <input asp-for="Address.State" type="text" class="form-control" placeholder="Enter state">
+                <span asp-validation-for="Address.State" class="text-danger"></span>
+            </div>
+
+            <!-- Country -->
+            <div class="form-group">
+                <label asp-for="Address.Country">Country</label>
+                <input asp-for="Address.Country" type="text" class="form-control" placeholder="Enter country">
+                <span asp-validation-for="Address.Country" class="text-danger"></span>
+            </div>
+
+            <!-- Track Description -->
+            <div class="form-group">
+                <label asp-for="TrackDescription">Track Description</label>
+                <input asp-for="TrackDescription" type="text" class="form-control" placeholder="Describe the track">
+                <span asp-validation-for="TrackDescription" class="text-danger"></span>
+            </div>
+
+            <!-- Race Type -->
+            <div class="form-group">
+                <label asp-for="RaceType">Race Type</label>
+                <select asp-for="RaceType" asp-items="@Html.GetEnumSelectList<RaceType>()" class="form-select">
+                    <option>--- Select ---</option>
+                </select>
+                <span asp-validation-for="RaceType" class="text-danger"></span>
+            </div>
+
+            <!-- Race Category -->
+            <div class="form-group">
+                <label asp-for="RaceCategory">Race Category</label>
+                <select asp-for="RaceCategory" asp-items="@Html.GetEnumSelectList<RaceCategory>()" class="form-select">
+                    <option>--- Select ---</option>
+                </select>
+            </div>
+
+            <!-- Start Date -->
+            <div class="form-group">
+                <label asp-for="StartDate">Start Date</label>
+                <input asp-for="StartDate" type="date" class="form-control">
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <!-- End Date -->
+            <div class="form-group">
+                <label asp-for="EndDate">End Date</label>
+                <input asp-for="EndDate" type="date" class="form-control">
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+
+            <!-- Track Layout Image -->
+            <div class="form-group">
+                <label asp-for="TrackLayout">New Track Layout</label>
+                <input asp-for="TrackLayout" type="file" class="form-control">
+                <span asp-validation-for="TrackLayout" class="text-danger"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
